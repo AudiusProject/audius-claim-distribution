@@ -1,0 +1,58 @@
+{
+  "name": "audius-token-claim-distribution",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "@openzeppelin/contracts": "3.2.0",
+    "@openzeppelin/test-helpers": "^0.5.5",
+    "truffle": "5.1.23",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "ethereumjs-abi": "^0.6.7",
+    "ethlint": "^1.2.3",
+    "truffle-hdwallet-provider": "^1.0.13",
+    "async": "^2.6.1",
+    "babel-register": "^6.26.0",
+    "bignumber.js": "8.0.1",
+    "solidity-coverage": "^0.7.4",
+    "standard": "^12.0.1",
+    "ethers": "^4.0.0"
+  },
+  "scripts": {
+    "ganache": "docker run --name audius_ganache_cli_eth_contracts -d -p 8547:8545 trufflesuite/ganache-cli:v6.9.1 -h 0.0.0.0 -a 50",
+    "ganache-test": "docker run --name audius_ganache_cli_eth_claim_contracts_test -d -p 8557:8545 trufflesuite/ganache-cli:v6.9.1 -h 0.0.0.0 -a 50",
+    "ganache-i": "docker ps",
+    "ganache-q": "docker rm -f audius_ganache_cli_eth_contracts > /dev/null",
+    "ganache-test-q": "docker rm -f audius_ganache_cli_eth_claim_contracts_test > /dev/null",
+    "truffle-compile": "./node_modules/.bin/truffle compile",
+    "truffle-migrate": "./node_modules/.bin/truffle migrate --reset --network development",
+    "truffle-migrate-test": "./node_modules/.bin/truffle migrate --reset --network test_local",
+    "truffle-console": "./node_modules/.bin/truffle console --network development",
+    "truffle-console-test": "./node_modules/.bin/truffle console --network test_local",
+    "test": "npm run truffle-test",
+    "test-coverage": "ENABLE_OPTIMIZER=false node --max-old-space-size=4096 ./node_modules/.bin/truffle run coverage --file='test/*.js'",
+    "test-only": "./node_modules/.bin/truffle test test/*.js --network=test_local",
+    "test-random": "./scripts/truffle-test.sh --audius-random",
+    "truffle-test": "./scripts/truffle-test.sh",
+    "truffle-test-v": "./scripts/truffle-test.sh --verbose-rpc",
+    "test-circle-ci": "./scripts/circleci-test.sh",
+    "solidity-lint": "./node_modules/.bin/solium -d contracts",
+    "lint": "./node_modules/.bin/standard",
+    "lint-circle-ci": "./scripts/lint.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AudiusProject/audius-claim-distribution.git"
+  },
+  "engines": {
+    "node": ">=10.16.0",
+    "npm": "6.1.0"
+  },
+  "author": "AudiusProject",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AudiusProject/audius-claim-distribution/issues"
+  },
+  "homepage": "https://github.com/AudiusProject/audius-claim-distribution#readme"
+}
