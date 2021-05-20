@@ -6,9 +6,9 @@ This repo contains the contract to do token claim distribution for a set of user
 There are two pieces of information that the migrations depend on and both are set in contract-config.js, the `tokenAddress` and `merkleRoot`. `tokenAddress` is the address for the ERC-20 Audius token and the `merkleRoot` instructions are given below.
 
 ### Generating the merkle root and the JSON file
-This Uniswap repo (https://github.com/Uniswap/merkle-distributor) contains the contract that we vendored in this repo. It also contains scripts to convert a json object of { walletAddress: tokenAmount } into the merkle object. In order to generate that object:
+This Uniswap repo (https://github.com/Uniswap/merkle-distributor) contains the contract that we vendored in this repo. It also contains scripts to convert a json array of `[{ "address": <address>, "earnings": <integer wei amount>, "reasons": '' }]` into the merkle object. In order to generate that object:
 
-1. In the scripts/ folder run `python csv_to_json.py` to convert our csv with columns `wallet` and `tokens` to a uniswap script compatible { walletAddress: tokenAmount } object.
+1. In the scripts/ folder run `python csv_to_json.py` to convert our csv with columns `wallet` and `tokens` to a uniswap script compatible `[{ "address": <address>, "earnings": <integer wei amount>, "reasons": '' }]` array.
 2. In the `merkle-distributor` repo under scripts/ run `tsc` to generate the node.js files.
 3. Run `node generate-merkle-root.js -i allocation_output.json >> allocation_merkle_output.json` to get the merkle object
 4. Run `node verify-merkle-root.js -i allocation_merkle_output.json` against the output merkle json object to verify it's validity.
